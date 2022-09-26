@@ -1,27 +1,14 @@
-class Book {
-  constructor(title, author) {
-    this.title = title;
-    this.author = author;
-  }
+import Book from './js/book.js';
+import { DateTime } from './js/luxon.js';
+import showBooks from './js/showBooks.js';
 
-  addBook() {
-    const books = JSON.parse(localStorage.getItem('books')) || [];
-    books.push(this);
-    localStorage.setItem('books', JSON.stringify(books));
-  }
-
-  removeBook() {
-    const books = JSON.parse(localStorage.getItem('books')) || [];
-    const filteredBooks = books.filter((book) => book.title !== this.title);
-    localStorage.setItem('books', JSON.stringify(filteredBooks));
-  }
-}
-
+const dateSpan = document.querySelector('.date');
 const titleInput = document.querySelector('.title-value');
 const authorInput = document.querySelector('.author-value');
-const dateSpan = document.querySelector('.date');
 
-dateSpan.textContent = new Date();
+setInterval(() => {
+  dateSpan.textContent = DateTime.now().toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS);
+}, 1000);
 
 const listBookElement = document.querySelector('#list-book');
 
@@ -32,32 +19,7 @@ listBookElement.addEventListener('click', () => {
   const books = JSON.parse(localStorage.getItem('books')) || [];
   const booksContainer = document.querySelector('.books');
 
-  if (books.length === 0) {
-    booksContainer.innerHTML = '<p class="no-books">No books added yet</p>';
-    // Remove border from books container
-    booksContainer.style.border = 'none';
-  } else {
-    booksContainer.style.border = '2px solid #000';
-    booksContainer.innerHTML = '';
-    books.forEach((book, index) => {
-      booksContainer.innerHTML += `
-      <div class="book">
-        <div class="data-container">
-          <p class="title">${book.title}</p>
-          <span>by</span>
-          <p class="author">${book.author}</p>
-        </div>
-        <button type="button" class="remove-btn">Remove</button>
-      </div>
-    `;
-      // Different background for odd and even books
-      if (index % 2 === 0) {
-        booksContainer.lastElementChild.style.backgroundColor = '#DDD';
-      } else {
-        booksContainer.lastElementChild.style.backgroundColor = '#fff';
-      }
-    });
-  }
+  showBooks(booksContainer, books);
   // Hide the add book form
   document.querySelector('.create-book').style.display = 'none';
 });
