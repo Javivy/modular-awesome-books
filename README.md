@@ -13,7 +13,7 @@
 
 
 ## Live Demo
-[Not available yet but checkout this cool GIF](https://giphy.com/clips/hamlet-jJjb9AUHOiP3nJJMdy)
+[Check out this link](https://javivy.github.io/modular-awesome-books)
 
 
 ## Getting Started
