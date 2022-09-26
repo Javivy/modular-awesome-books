@@ -1,6 +1,6 @@
-import Book from './js/book.js';
-import { DateTime } from './js/luxon.js';
-import showBooks from './js/showBooks.js';
+import Book from './modules/book.js';
+import { DateTime } from './modules/luxon.js';
+import showBooks from './modules/showBooks.js';
 
 const dateSpan = document.querySelector('.date');
 const titleInput = document.querySelector('.title-value');
